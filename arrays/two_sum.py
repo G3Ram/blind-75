@@ -20,7 +20,7 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(n)
 """
 
-from typing import List, Optional
+from typing import List
 
 
 def two_sum(nums: List[int], target: int) -> List[int]:
@@ -41,31 +41,61 @@ def two_sum(nums: List[int], target: int) -> List[int]:
 def test_two_sum():
     """Test cases for two_sum"""
 
-    # Test case 1: Basic example
-    print("Test case 1: nums = [2,7,11,15], target = 9")
-    result = two_sum([2, 7, 11, 15], 9)
-    assert result == [0, 1], f"Expected [0, 1], got {result}"
-    print(f"✓ Passed: {result}")
+    test_cases = [
+        {
+            "name": "Test case 1: Basic example",
+            "input": ([2, 7, 11, 15], 9),
+            "expected": [0, 1]
+        },
+        {
+            "name": "Test case 2: Target at end",
+            "input": ([3, 2, 4], 6),
+            "expected": [1, 2]
+        },
+        {
+            "name": "Test case 3: Same number used",
+            "input": ([3, 3], 6),
+            "expected": [0, 1]
+        },
+        {
+            "name": "Edge case: Negative numbers",
+            "input": ([-1, -2, -3, -4, -5], -8),
+            "expected": [2, 4]
+        }
+    ]
 
-    # Test case 2: Target at end
-    print("\nTest case 2: nums = [3,2,4], target = 6")
-    result = two_sum([3, 2, 4], 6)
-    assert result == [1, 2], f"Expected [1, 2], got {result}"
-    print(f"✓ Passed: {result}")
+    passed = 0
+    failed = 0
 
-    # Test case 3: Same number used
-    print("\nTest case 3: nums = [3,3], target = 6")
-    result = two_sum([3, 3], 6)
-    assert result == [0, 1], f"Expected [0, 1], got {result}"
-    print(f"✓ Passed: {result}")
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: nums = {test['input'][0]}, target = {test['input'][1]}")
+        print(f"  Expected: {test['expected']}")
 
-    # Edge case: Negative numbers
-    print("\nEdge case: nums = [-1,-2,-3,-4,-5], target = -8")
-    result = two_sum([-1, -2, -3, -4, -5], -8)
-    assert result == [2, 4], f"Expected [2, 4], got {result}"
-    print(f"✓ Passed: {result}")
+        try:
+            result = two_sum(test['input'][0], test['input'][1])
 
-    print("\n✓ All test cases passed!")
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            elif result == test['expected']:
+                print(f"  ✓ PASSED: {result}")
+                passed += 1
+            else:
+                print(f"  ✗ FAILED: Got {result}")
+                failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
