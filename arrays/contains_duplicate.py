@@ -20,18 +20,18 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(n)
 """
 
-from typing import List, Optional
+from typing import List
 
 
-def contains_duplicate(nums: List[int]) -> int:
+def contains_duplicate(nums: List[int]) -> bool:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        nums: Input array of integers
 
     Returns:
-        Result based on problem requirements
+        True if any value appears at least twice, False if all elements are distinct
     """
     pass
 
@@ -40,19 +40,97 @@ def contains_duplicate(nums: List[int]) -> int:
 def test_contains_duplicate():
     """Test cases for contains_duplicate"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Has duplicate",
+            "input": [1, 2, 3, 1],
+            "expected": True
+        },
+        {
+            "name": "Test case 2: No duplicates",
+            "input": [1, 2, 3, 4],
+            "expected": False
+        },
+        {
+            "name": "Test case 3: Multiple duplicates",
+            "input": [1, 1, 1, 3, 3, 4, 3, 2, 4, 2],
+            "expected": True
+        },
+        {
+            "name": "Edge case: Single element",
+            "input": [1],
+            "expected": False
+        },
+        {
+            "name": "Edge case: Two same elements",
+            "input": [5, 5],
+            "expected": True
+        },
+        {
+            "name": "Edge case: Two different elements",
+            "input": [1, 2],
+            "expected": False
+        },
+        {
+            "name": "Edge case: Negative numbers with duplicate",
+            "input": [-1, -2, -3, -1],
+            "expected": True
+        },
+        {
+            "name": "Edge case: Negative numbers, no duplicate",
+            "input": [-3, -2, -1, 0],
+            "expected": False
+        },
+        {
+            "name": "Edge case: All same elements",
+            "input": [7, 7, 7, 7],
+            "expected": True
+        },
+        {
+            "name": "Edge case: Duplicate at end only",
+            "input": [1, 2, 3, 4, 5, 1],
+            "expected": True
+        },
+        {
+            "name": "Edge case: Large values",
+            "input": [10**9, -(10**9), 10**9],
+            "expected": True
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: nums = {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = contains_duplicate(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
