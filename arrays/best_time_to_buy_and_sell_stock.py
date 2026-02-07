@@ -19,18 +19,18 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(1)
 """
 
-from typing import List, Optional
+from typing import List
 
 
-def best_time_to_buy_and_sell_stock(nums: List[int]) -> int:
+def best_time_to_buy_and_sell_stock(prices: List[int]) -> int:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        prices: Array where prices[i] is the stock price on day i
 
     Returns:
-        Result based on problem requirements
+        Maximum profit achievable, or 0 if no profit is possible
     """
     pass
 
@@ -39,19 +39,87 @@ def best_time_to_buy_and_sell_stock(nums: List[int]) -> int:
 def test_best_time_to_buy_and_sell_stock():
     """Test cases for best_time_to_buy_and_sell_stock"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Basic example",
+            "input": [7, 1, 5, 3, 6, 4],
+            "expected": 5
+        },
+        {
+            "name": "Test case 2: Decreasing prices, no profit",
+            "input": [7, 6, 4, 3, 1],
+            "expected": 0
+        },
+        {
+            "name": "Test case 3: Buy low sell high in middle",
+            "input": [3, 2, 6, 5, 0, 3],
+            "expected": 4
+        },
+        {
+            "name": "Edge case: Single element",
+            "input": [1],
+            "expected": 0
+        },
+        {
+            "name": "Edge case: Two elements, profit",
+            "input": [1, 2],
+            "expected": 1
+        },
+        {
+            "name": "Edge case: Two elements, no profit",
+            "input": [2, 1],
+            "expected": 0
+        },
+        {
+            "name": "Edge case: All same prices",
+            "input": [3, 3, 3, 3],
+            "expected": 0
+        },
+        {
+            "name": "Edge case: Max profit at very end",
+            "input": [1, 2, 3, 4, 5],
+            "expected": 4
+        },
+        {
+            "name": "Edge case: Best buy is not first element",
+            "input": [2, 4, 1],
+            "expected": 2
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: prices = {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = best_time_to_buy_and_sell_stock(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":

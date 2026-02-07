@@ -19,7 +19,7 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(1)
 """
 
-from typing import List, Optional
+from typing import List
 
 
 def maximum_subarray(nums: List[int]) -> int:
@@ -27,10 +27,10 @@ def maximum_subarray(nums: List[int]) -> int:
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        nums: Input array of integers
 
     Returns:
-        Result based on problem requirements
+        Sum of the contiguous subarray with the largest sum
     """
     pass
 
@@ -39,19 +39,82 @@ def maximum_subarray(nums: List[int]) -> int:
 def test_maximum_subarray():
     """Test cases for maximum_subarray"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Basic example with mixed values",
+            "input": [-2, 1, -3, 4, -1, 2, 1, -5, 4],
+            "expected": 6
+        },
+        {
+            "name": "Test case 2: All positive, entire array",
+            "input": [5, 4, -1, 7, 8],
+            "expected": 23
+        },
+        {
+            "name": "Test case 3: Single element",
+            "input": [1],
+            "expected": 1
+        },
+        {
+            "name": "Edge case: All negative numbers",
+            "input": [-1, -2, -3],
+            "expected": -1
+        },
+        {
+            "name": "Edge case: Two negative elements",
+            "input": [-2, -1],
+            "expected": -1
+        },
+        {
+            "name": "Edge case: Single negative element",
+            "input": [-5],
+            "expected": -5
+        },
+        {
+            "name": "Edge case: Zeros and positives",
+            "input": [0, 0, 3, 0],
+            "expected": 3
+        },
+        {
+            "name": "Edge case: Large positive followed by large negative",
+            "input": [10, -5, 1],
+            "expected": 6
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: nums = {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = maximum_subarray(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
