@@ -21,18 +21,16 @@ Time Complexity Target: O(1)
 Space Complexity Target: O(1)
 """
 
-from typing import List, Optional
 
-
-def number_of_1_bits(nums: List[int]) -> int:
+def number_of_1_bits(n: int) -> int:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        n: An unsigned 32-bit integer
 
     Returns:
-        Result based on problem requirements
+        Number of '1' bits in the binary representation of n
     """
     pass
 
@@ -41,19 +39,82 @@ def number_of_1_bits(nums: List[int]) -> int:
 def test_number_of_1_bits():
     """Test cases for number_of_1_bits"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: n=11 (binary 1011)",
+            "input": 11,
+            "expected": 3,
+        },
+        {
+            "name": "Test case 2: n=128 (binary 10000000)",
+            "input": 128,
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: minimum value n=1 (binary 1)",
+            "input": 1,
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: power of 2 (single bit set)",
+            "input": 1024,
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: n=7 (binary 111, three consecutive 1s)",
+            "input": 7,
+            "expected": 3,
+        },
+        {
+            "name": "Edge case: n=2147483647 (2^31-1, all 31 bits set)",
+            "input": 2147483647,
+            "expected": 31,
+        },
+        {
+            "name": "Edge case: n=2147483648 (2^31, only highest bit set)",
+            "input": 2147483648,
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: alternating bits n=1431655765 (01010101...)",
+            "input": 1431655765,
+            "expected": 16,
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = number_of_1_bits(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
