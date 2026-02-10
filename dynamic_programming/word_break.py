@@ -24,15 +24,16 @@ Space Complexity Target: O(n)
 from typing import List, Optional
 
 
-def word_break(nums: List[int]) -> int:
+def word_break(s: str, wordDict: List[str]) -> bool:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        s: String to segment
+        wordDict: List of valid words
 
     Returns:
-        Result based on problem requirements
+        True if s can be segmented using words in wordDict, False otherwise
     """
     pass
 
@@ -41,19 +42,90 @@ def word_break(nums: List[int]) -> int:
 def test_word_break():
     """Test cases for word_break"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: s='leetcode', wordDict=['leet','code']",
+            "s": "leetcode",
+            "wordDict": ["leet", "code"],
+            "expected": True,
+        },
+        {
+            "name": "Test case 2: s='applepenapple', wordDict=['apple','pen']",
+            "s": "applepenapple",
+            "wordDict": ["apple", "pen"],
+            "expected": True,
+        },
+        {
+            "name": "Test case 3: s='catsandog', wordDict=['cats','dog','sand','and','cat'] (impossible)",
+            "s": "catsandog",
+            "wordDict": ["cats", "dog", "sand", "and", "cat"],
+            "expected": False,
+        },
+        {
+            "name": "Edge case: single character word in dict",
+            "s": "a",
+            "wordDict": ["a"],
+            "expected": True,
+        },
+        {
+            "name": "Edge case: word not in dict",
+            "s": "hello",
+            "wordDict": ["world"],
+            "expected": False,
+        },
+        {
+            "name": "Edge case: repeated word usage",
+            "s": "aaaa",
+            "wordDict": ["aa"],
+            "expected": True,
+        },
+        {
+            "name": "Edge case: word equals full string",
+            "s": "hello",
+            "wordDict": ["hello"],
+            "expected": True,
+        },
+        {
+            "name": "Multiple valid segmentations exist",
+            "s": "catsanddog",
+            "wordDict": ["cat", "cats", "and", "sand", "dog"],
+            "expected": True,
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: s={test['s']!r}, wordDict={test['wordDict']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = word_break(test["s"], test["wordDict"])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test["expected"]:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":

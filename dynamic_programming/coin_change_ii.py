@@ -23,15 +23,16 @@ Space Complexity Target: O(amount)
 from typing import List, Optional
 
 
-def coin_change_ii(nums: List[int]) -> int:
+def coin_change_ii(amount: int, coins: List[int]) -> int:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        amount: Target amount to make
+        coins: List of coin denominations
 
     Returns:
-        Result based on problem requirements
+        Number of combinations that make up the amount
     """
     pass
 
@@ -40,19 +41,78 @@ def coin_change_ii(nums: List[int]) -> int:
 def test_coin_change_ii():
     """Test cases for coin_change_ii"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: amount=5, coins=[1,2,5]",
+            "amount": 5,
+            "coins": [1, 2, 5],
+            "expected": 4,
+        },
+        {
+            "name": "Test case 2: amount=3, coins=[2] (impossible)",
+            "amount": 3,
+            "coins": [2],
+            "expected": 0,
+        },
+        {
+            "name": "Edge case: amount=0 (one way - use no coins)",
+            "amount": 0,
+            "coins": [1, 2, 5],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: single coin equals amount",
+            "amount": 10,
+            "coins": [10],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: coins larger than amount",
+            "amount": 3,
+            "coins": [5, 10],
+            "expected": 0,
+        },
+        {
+            "name": "Multiple combos: amount=10, coins=[1,5,10]",
+            "amount": 10,
+            "coins": [1, 5, 10],
+            "expected": 4,
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: amount={test['amount']}, coins={test['coins']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = coin_change_ii(test["amount"], test["coins"])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test["expected"]:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
