@@ -19,10 +19,31 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(1)
 """
 
-from typing import List, Optional
+from typing import Optional
 
 
-def detect_cycle(head: Optional[ListNode]) -> Optional[ListNode]:
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def list_to_ll_with_cycle(arr, pos):
+    """
+    Convert a list to a linked list with an optional cycle.
+    pos: index where the tail connects back to (-1 means no cycle).
+    """
+    if not arr:
+        return None
+    nodes = [ListNode(val) for val in arr]
+    for i in range(len(nodes) - 1):
+        nodes[i].next = nodes[i + 1]
+    if pos >= 0:
+        nodes[-1].next = nodes[pos]
+    return nodes[0]
+
+
+def detect_cycle(head: Optional[ListNode]) -> bool:
     """
     TODO: Implement your solution here
 
@@ -30,7 +51,7 @@ def detect_cycle(head: Optional[ListNode]) -> Optional[ListNode]:
         head: Head of the linked list
 
     Returns:
-        Modified or new linked list head
+        True if the linked list has a cycle, False otherwise
     """
     pass
 
@@ -39,19 +60,90 @@ def detect_cycle(head: Optional[ListNode]) -> Optional[ListNode]:
 def test_detect_cycle():
     """Test cases for detect_cycle"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Cycle at index 1",
+            "arr": [3, 2, 0, -4],
+            "pos": 1,
+            "expected": True
+        },
+        {
+            "name": "Test case 2: Cycle at index 0",
+            "arr": [1, 2],
+            "pos": 0,
+            "expected": True
+        },
+        {
+            "name": "Test case 3: No cycle",
+            "arr": [1],
+            "pos": -1,
+            "expected": False
+        },
+        {
+            "name": "Edge case: Empty list",
+            "arr": [],
+            "pos": -1,
+            "expected": False
+        },
+        {
+            "name": "Edge case: Single node, self-cycle",
+            "arr": [1],
+            "pos": 0,
+            "expected": True
+        },
+        {
+            "name": "Edge case: Long list, no cycle",
+            "arr": [1, 2, 3, 4, 5, 6, 7],
+            "pos": -1,
+            "expected": False
+        },
+        {
+            "name": "Edge case: Long list, cycle at start",
+            "arr": [1, 2, 3, 4, 5, 6, 7],
+            "pos": 0,
+            "expected": True
+        },
+        {
+            "name": "Edge case: Long list, cycle in middle",
+            "arr": [1, 2, 3, 4, 5, 6, 7],
+            "pos": 3,
+            "expected": True
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: arr={test['arr']}, pos={test['pos']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            head = list_to_ll_with_cycle(test['arr'], test['pos'])
+            result = detect_cycle(head)
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            elif result == test['expected']:
+                print(f"  ✓ PASSED: {result}")
+                passed += 1
+            else:
+                print(f"  ✗ FAILED: Got {result}")
+                failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
