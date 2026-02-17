@@ -19,18 +19,18 @@ Time Complexity Target: O(n log n)
 Space Complexity Target: O(n)
 """
 
-from typing import List, Optional
+from typing import List
 
 
-def meeting_rooms_ii(nums: List[int]) -> int:
+def meeting_rooms_ii(intervals: List[List[int]]) -> int:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        intervals: List of meeting time intervals [start, end]
 
     Returns:
-        Result based on problem requirements
+        Minimum number of conference rooms required
     """
     pass
 
@@ -39,19 +39,82 @@ def meeting_rooms_ii(nums: List[int]) -> int:
 def test_meeting_rooms_ii():
     """Test cases for meeting_rooms_ii"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Need 2 rooms",
+            "input": [[0, 30], [5, 10], [15, 20]],
+            "expected": 2,
+        },
+        {
+            "name": "Test case 2: Need 1 room",
+            "input": [[7, 10], [2, 4]],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: Single meeting",
+            "input": [[1, 5]],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: All meetings overlap",
+            "input": [[1, 10], [1, 10], [1, 10]],
+            "expected": 3,
+        },
+        {
+            "name": "Edge case: Back-to-back meetings",
+            "input": [[0, 5], [5, 10], [10, 15]],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: No overlaps",
+            "input": [[1, 2], [3, 4], [5, 6]],
+            "expected": 1,
+        },
+        {
+            "name": "Edge case: Need 3 rooms at peak",
+            "input": [[0, 10], [1, 9], [2, 8]],
+            "expected": 3,
+        },
+        {
+            "name": "Edge case: Rooms freed and reused",
+            "input": [[0, 5], [1, 6], [5, 10], [6, 11]],
+            "expected": 2,
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = meeting_rooms_ii(test["input"])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test["expected"]:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
