@@ -21,18 +21,19 @@ Time Complexity Target: O(n log k)
 Space Complexity Target: O(n)
 """
 
-from typing import List, Optional
+from typing import List
 
 
-def top_k_frequent_elements(nums: List[int]) -> int:
+def top_k_frequent_elements(nums: List[int], k: int) -> List[int]:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        nums: Input integer array
+        k: Number of top frequent elements to return
 
     Returns:
-        Result based on problem requirements
+        List of k most frequent elements
     """
     pass
 
@@ -41,19 +42,84 @@ def top_k_frequent_elements(nums: List[int]) -> int:
 def test_top_k_frequent_elements():
     """Test cases for top_k_frequent_elements"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: basic example with k=2",
+            "nums": [1, 1, 1, 2, 2, 3],
+            "k": 2,
+            "expected": [1, 2],
+        },
+        {
+            "name": "Test case 2: single element",
+            "nums": [1],
+            "k": 1,
+            "expected": [1],
+        },
+        {
+            "name": "Test case 3: all same elements",
+            "nums": [3, 3, 3, 3],
+            "k": 1,
+            "expected": [3],
+        },
+        {
+            "name": "Test case 4: k equals number of unique elements",
+            "nums": [1, 2, 3],
+            "k": 3,
+            "expected": [1, 2, 3],
+        },
+        {
+            "name": "Test case 5: negative numbers",
+            "nums": [-1, -1, -2, -2, -2, 3],
+            "k": 2,
+            "expected": [-2, -1],
+        },
+        {
+            "name": "Test case 6: clear winner for k=1",
+            "nums": [1, 1, 2, 2, 3, 3, 3],
+            "k": 1,
+            "expected": [3],
+        },
+        {
+            "name": "Test case 7: larger input",
+            "nums": [4, 4, 4, 5, 5, 6, 6, 6, 6, 7],
+            "k": 2,
+            "expected": [6, 4],
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: nums={test['nums']}, k={test['k']}")
+        print(f"  Expected: {sorted(test['expected'])}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = top_k_frequent_elements(test["nums"], test["k"])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if sorted(result) == sorted(test["expected"]):
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
