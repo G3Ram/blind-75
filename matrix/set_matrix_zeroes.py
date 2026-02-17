@@ -20,18 +20,21 @@ Time Complexity Target: O(m*n)
 Space Complexity Target: O(1)
 """
 
-from typing import List, Optional
+import copy
+from typing import List
 
 
-def set_matrix_zeroes(nums: List[int]) -> int:
+def set_matrix_zeroes(matrix: List[List[int]]) -> None:
     """
     TODO: Implement your solution here
 
+    Modifies matrix in-place. Returns None.
+
     Args:
-        nums: Input array or parameters
+        matrix: m x n integer matrix
 
     Returns:
-        Result based on problem requirements
+        None (modifies matrix in-place)
     """
     pass
 
@@ -40,19 +43,83 @@ def set_matrix_zeroes(nums: List[int]) -> int:
 def test_set_matrix_zeroes():
     """Test cases for set_matrix_zeroes"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: single zero in middle",
+            "input": [[1, 1, 1], [1, 0, 1], [1, 1, 1]],
+            "expected": [[1, 0, 1], [0, 0, 0], [1, 0, 1]],
+        },
+        {
+            "name": "Test case 2: zeros in first and last columns",
+            "input": [[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]],
+            "expected": [[0, 0, 0, 0], [0, 4, 5, 0], [0, 3, 1, 0]],
+        },
+        {
+            "name": "Edge case: single element zero",
+            "input": [[0]],
+            "expected": [[0]],
+        },
+        {
+            "name": "Edge case: single element non-zero",
+            "input": [[1]],
+            "expected": [[1]],
+        },
+        {
+            "name": "Edge case: no zeros present",
+            "input": [[1, 2], [3, 4]],
+            "expected": [[1, 2], [3, 4]],
+        },
+        {
+            "name": "Edge case: all zeros",
+            "input": [[0, 0], [0, 0]],
+            "expected": [[0, 0], [0, 0]],
+        },
+        {
+            "name": "Edge case: zero in corner",
+            "input": [[0, 1, 1], [1, 1, 1], [1, 1, 1]],
+            "expected": [[0, 0, 0], [0, 1, 1], [0, 1, 1]],
+        },
+        {
+            "name": "Edge case: multiple zeros in same row",
+            "input": [[1, 0, 1], [0, 1, 1], [1, 1, 1]],
+            "expected": [[0, 0, 0], [0, 0, 0], [0, 0, 1]],
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            matrix = copy.deepcopy(test["input"])
+            set_matrix_zeroes(matrix)
+            result = matrix
+
+            if result == test["input"] and test["input"] != test["expected"]:
+                print(f"  ✗ FAILED: Function not yet implemented (matrix unchanged)")
+                failed += 1
+            elif result == test["expected"]:
+                print(f"  ✓ PASSED: {result}")
+                passed += 1
+            else:
+                print(f"  ✗ FAILED: Got {result}")
+                failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
