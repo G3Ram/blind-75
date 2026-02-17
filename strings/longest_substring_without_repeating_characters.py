@@ -22,18 +22,16 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(min(m,n))
 """
 
-from typing import List, Optional
 
-
-def longest_substring_without_repeating_characters(nums: List[int]) -> int:
+def longest_substring_without_repeating_characters(s: str) -> int:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        s: Input string
 
     Returns:
-        Result based on problem requirements
+        Length of the longest substring without repeating characters
     """
     pass
 
@@ -42,19 +40,87 @@ def longest_substring_without_repeating_characters(nums: List[int]) -> int:
 def test_longest_substring_without_repeating_characters():
     """Test cases for longest_substring_without_repeating_characters"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Repeating pattern",
+            "input": "abcabcbb",
+            "expected": 3
+        },
+        {
+            "name": "Test case 2: All same characters",
+            "input": "bbbbb",
+            "expected": 1
+        },
+        {
+            "name": "Test case 3: Partial repeat",
+            "input": "pwwkew",
+            "expected": 3
+        },
+        {
+            "name": "Test case 4: Empty string",
+            "input": "",
+            "expected": 0
+        },
+        {
+            "name": "Test case 5: Single character",
+            "input": "a",
+            "expected": 1
+        },
+        {
+            "name": "Test case 6: All unique characters",
+            "input": "abcdef",
+            "expected": 6
+        },
+        {
+            "name": "Edge case: Two characters same",
+            "input": "aa",
+            "expected": 1
+        },
+        {
+            "name": "Edge case: Space character",
+            "input": "a b",
+            "expected": 3
+        },
+        {
+            "name": "Edge case: Digits and letters",
+            "input": "a1b2c3",
+            "expected": 6
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: '{test['input']}'")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = longest_substring_without_repeating_characters(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":

@@ -22,18 +22,16 @@ Time Complexity Target: O(n)
 Space Complexity Target: O(n)
 """
 
-from typing import List, Optional
 
-
-def valid_parentheses(nums: List[int]) -> int:
+def valid_parentheses(s: str) -> bool:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        s: String containing only bracket characters '()[]{}'
 
     Returns:
-        Result based on problem requirements
+        True if the brackets are valid and properly matched, False otherwise
     """
     pass
 
@@ -42,19 +40,92 @@ def valid_parentheses(nums: List[int]) -> int:
 def test_valid_parentheses():
     """Test cases for valid_parentheses"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Simple matching pair",
+            "input": "()",
+            "expected": True
+        },
+        {
+            "name": "Test case 2: Multiple types in sequence",
+            "input": "()[]{}",
+            "expected": True
+        },
+        {
+            "name": "Test case 3: Mismatched brackets",
+            "input": "(]",
+            "expected": False
+        },
+        {
+            "name": "Test case 4: Nested brackets",
+            "input": "([{}])",
+            "expected": True
+        },
+        {
+            "name": "Test case 5: Wrong closing order",
+            "input": "([)]",
+            "expected": False
+        },
+        {
+            "name": "Test case 6: Only opening brackets",
+            "input": "(((",
+            "expected": False
+        },
+        {
+            "name": "Test case 7: Only closing brackets",
+            "input": ")))",
+            "expected": False
+        },
+        {
+            "name": "Edge case: Single bracket",
+            "input": "{",
+            "expected": False
+        },
+        {
+            "name": "Edge case: All three types nested",
+            "input": "{[()]}",
+            "expected": True
+        },
+        {
+            "name": "Edge case: Unbalanced with extra open",
+            "input": "(()",
+            "expected": False
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: '{test['input']}'")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = valid_parentheses(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                if result == test['expected']:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":

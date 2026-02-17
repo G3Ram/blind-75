@@ -19,18 +19,18 @@ Time Complexity Target: O(n*k)
 Space Complexity Target: O(n*k)
 """
 
-from typing import List, Optional
+from typing import List
 
 
-def group_anagrams(nums: List[int]) -> int:
+def group_anagrams(strs: List[str]) -> List[List[str]]:
     """
     TODO: Implement your solution here
 
     Args:
-        nums: Input array or parameters
+        strs: List of strings to group by anagram
 
     Returns:
-        Result based on problem requirements
+        List of groups where each group contains strings that are anagrams of each other
     """
     pass
 
@@ -39,19 +39,80 @@ def group_anagrams(nums: List[int]) -> int:
 def test_group_anagrams():
     """Test cases for group_anagrams"""
 
-    # Test case 1
-    print("Test case 1...")
-    # TODO: Add test case implementation
+    test_cases = [
+        {
+            "name": "Test case 1: Mixed anagram groups",
+            "input": ["eat", "tea", "tan", "ate", "nat", "bat"],
+            "expected": [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]
+        },
+        {
+            "name": "Test case 2: Single string",
+            "input": ["a"],
+            "expected": [["a"]]
+        },
+        {
+            "name": "Test case 3: All same string",
+            "input": ["abc", "abc", "abc"],
+            "expected": [["abc", "abc", "abc"]]
+        },
+        {
+            "name": "Test case 4: No anagrams",
+            "input": ["abc", "def", "ghi"],
+            "expected": [["abc"], ["def"], ["ghi"]]
+        },
+        {
+            "name": "Edge case: Single character strings",
+            "input": ["a", "b", "a"],
+            "expected": [["a", "a"], ["b"]]
+        },
+        {
+            "name": "Edge case: Empty strings",
+            "input": ["", ""],
+            "expected": [["", ""]]
+        },
+        {
+            "name": "Edge case: All anagrams",
+            "input": ["eat", "tea", "ate"],
+            "expected": [["eat", "tea", "ate"]]
+        },
+    ]
 
-    # Test case 2
-    print("Test case 2...")
-    # TODO: Add test case implementation
+    passed = 0
+    failed = 0
 
-    # Edge cases
-    print("Edge case tests...")
-    # TODO: Add edge case tests
+    for test in test_cases:
+        print(f"\n{test['name']}")
+        print(f"  Input: {test['input']}")
+        print(f"  Expected: {test['expected']}")
 
-    print("✓ All test cases passed!")
+        try:
+            result = group_anagrams(test['input'])
+
+            if result is None:
+                print(f"  ✗ FAILED: Function not yet implemented (returned None)")
+                failed += 1
+            else:
+                # Normalize: sort each group and sort the list of groups for comparison
+                result_sorted = sorted([sorted(g) for g in result])
+                expected_sorted = sorted([sorted(g) for g in test['expected']])
+                if result_sorted == expected_sorted:
+                    print(f"  ✓ PASSED: {result}")
+                    passed += 1
+                else:
+                    print(f"  ✗ FAILED: Got {result}")
+                    failed += 1
+
+        except Exception as e:
+            print(f"  ✗ FAILED: {type(e).__name__}: {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
+
+    if failed == 0:
+        print("✓ All test cases passed!")
+    else:
+        print("✗ Some test cases failed. Please review the implementation.")
 
 
 if __name__ == "__main__":
